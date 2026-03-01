@@ -51,6 +51,10 @@ coverage.xml
 .DS_Store
 Thumbs.db
 
+# Type checking / linting caches
+.mypy_cache/
+.ruff_cache/
+
 # Secrets / config
 *.env
 config.local.*
