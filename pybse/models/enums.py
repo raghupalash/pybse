@@ -1,31 +1,16 @@
 """
 pybse.models.enums
 ==================
-All BSE protocol enums. Members inherit from str so they work as plain
+All BSE protocol enums. Members inherit from StrEnum so they work as plain
 strings without calling .value (e.g. in format strings and API payloads).
 """
 
 from __future__ import annotations
 
-from enum import Enum
+from enum import StrEnum
 
 
-class _BSEStr(str, Enum):
-    """Base for all BSE string enums.
-
-    Python 3.12 changed (str, Enum).__format__ to return 'ClassName.member'
-    rather than the value. This base class restores the expected behaviour so
-    that f-strings and str.format() always produce the raw BSE code.
-    """
-
-    def __format__(self, spec: str) -> str:
-        return str.__format__(self.value, spec)
-
-    def __str__(self) -> str:
-        return str.__str__(self)
-
-
-class TaxStatus(_BSEStr):
+class TaxStatus(StrEnum):
     """BSE tax status codes. v1 only permits INDIVIDUAL."""
 
     INDIVIDUAL = "01"
@@ -36,13 +21,13 @@ class TaxStatus(_BSEStr):
     NRO = "24"
 
 
-class Gender(_BSEStr):
+class Gender(StrEnum):
     MALE = "M"
     FEMALE = "F"
     OTHER = "O"
 
 
-class OccupationCode(_BSEStr):
+class OccupationCode(StrEnum):
     BUSINESS = "01"
     SERVICE = "02"
     PROFESSIONAL = "03"
@@ -59,7 +44,7 @@ class OccupationCode(_BSEStr):
     UNKNOWN = "99"
 
 
-class OccupationType(_BSEStr):
+class OccupationType(StrEnum):
     """FATCA occupation type — coarser grouping derived from OccupationCode.
 
     Callers never set this directly; use from_occupation() or let the
@@ -88,15 +73,13 @@ class OccupationType(_BSEStr):
         return cls.OTHERS
 
 
-class HoldingNature(_BSEStr):
-    """v1 always uses SINGLE."""
-
+class HoldingNature(StrEnum):
     SINGLE = "SI"
     JOINT = "JO"
     ANYONE_OR_SURVIVOR = "AS"
 
 
-class AccountType(_BSEStr):
+class AccountType(StrEnum):
     """v1 only allows SAVINGS and CURRENT."""
 
     SAVINGS = "SB"
@@ -105,26 +88,26 @@ class AccountType(_BSEStr):
     NRO = "NO"
 
 
-class DividendPayMode(_BSEStr):
+class DividendPayMode(StrEnum):
     DIRECT_CREDIT = "02"
 
 
-class KYCType(_BSEStr):
+class KYCType(StrEnum):
     KRA_COMPLIANT = "K"
     CKYC_COMPLIANT = "C"
     BIOMETRIC = "B"
     AADHAAR_EKYC = "E"
 
 
-class PaperlessFlag(_BSEStr):
+class PaperlessFlag(StrEnum):
     EKYC = "Z"
 
 
-class CommunicationMode(_BSEStr):
+class CommunicationMode(StrEnum):
     EMAIL = "E"
 
 
-class IndianState(_BSEStr):
+class IndianState(StrEnum):
     ANDHRA_PRADESH = "AP"
     ARUNACHAL_PRADESH = "AR"
     ASSAM = "AS"
@@ -164,7 +147,7 @@ class IndianState(_BSEStr):
     LADAKH = "LA"
 
 
-class NomineeRelation(_BSEStr):
+class NomineeRelation(StrEnum):
     AUNT = "01"
     BROTHER_IN_LAW = "02"
     BROTHER = "03"
@@ -190,7 +173,7 @@ class NomineeRelation(_BSEStr):
     COURT_APPOINTED_GUARDIAN = "23"
 
 
-class NomineeIDType(_BSEStr):
+class NomineeIDType(StrEnum):
     PAN = "01"
     AADHAAR = "02"
     PASSPORT = "03"
@@ -199,7 +182,7 @@ class NomineeIDType(_BSEStr):
     OTHERS = "06"
 
 
-class SourceOfWealth(_BSEStr):
+class SourceOfWealth(StrEnum):
     SALARY = "01"
     BUSINESS_INCOME = "02"
     GIFT = "03"
@@ -210,7 +193,7 @@ class SourceOfWealth(_BSEStr):
     OTHERS = "08"
 
 
-class IncomeSlab(_BSEStr):
+class IncomeSlab(StrEnum):
     BELOW_1_LAC = "31"
     ABOVE_1_LAC_UPTO_5_LAC = "32"
     ABOVE_5_LAC_UPTO_10_LAC = "33"
@@ -219,10 +202,10 @@ class IncomeSlab(_BSEStr):
     ABOVE_1_CRORE = "36"
 
 
-class FATCATaxIDType(_BSEStr):
+class FATCATaxIDType(StrEnum):
     PASSPORT = "A"
     ELECTION_ID = "B"
-    PAN = "D"  # ⚠️ UNVERIFIED — pending BSE confirmation
+    PAN = "D"
     DRIVING_LICENCE = "E"
     AADHAAR = "G"
     NREGA_JOB_CARD = "H"
@@ -231,7 +214,7 @@ class FATCATaxIDType(_BSEStr):
     NOT_CATEGORIZED = "X"
 
 
-class FATCAAddressType(_BSEStr):
+class FATCAAddressType(StrEnum):
     RESIDENTIAL = "1"
     BUSINESS = "2"
     REGISTERED = "3"

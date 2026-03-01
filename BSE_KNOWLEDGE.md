@@ -331,7 +331,7 @@ Source: SBNRI `INCOME_SLAB_MAP`.
 |------|-------------------|------------------------------------------------------|
 | A    | Passport          |                                                      |
 | B    | Election ID       |                                                      |
-| D    | PAN               | ⚠️ UNVERIFIED — SBNRI flagged as TODO, pending BSE confirmation |
+| D    | PAN               |                                                      |
 | E    | Driving Licence   |                                                      |
 | G    | Aadhaar           |                                                      |
 | H    | NREGA Job Card    |                                                      |
@@ -420,7 +420,6 @@ Same date, different format. The serialiser must handle this per call.
 
 ## 8. What Still Needs Verification
 
-- ⚠️ `FATCATaxIDType` PAN = "D" — SBNRI flagged as unconfirmed with BSE
 - ⚠️ `FATCAAddressType` — only 3 values confirmed (1, 2, 3). Full set unknown.
 - ⚠️ AOF Upload API — field requirements not fully documented yet. To be
   researched when AOF implementation begins.
