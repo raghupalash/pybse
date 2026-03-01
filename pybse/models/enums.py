@@ -10,7 +10,22 @@ from __future__ import annotations
 from enum import Enum
 
 
-class TaxStatus(str, Enum):
+class _BSEStr(str, Enum):
+    """Base for all BSE string enums.
+
+    Python 3.12 changed (str, Enum).__format__ to return 'ClassName.member'
+    rather than the value. This base class restores the expected behaviour so
+    that f-strings and str.format() always produce the raw BSE code.
+    """
+
+    def __format__(self, spec: str) -> str:
+        return str.__format__(self.value, spec)
+
+    def __str__(self) -> str:
+        return str.__str__(self)
+
+
+class TaxStatus(_BSEStr):
     """BSE tax status codes. v1 only permits INDIVIDUAL."""
 
     INDIVIDUAL = "01"
@@ -21,13 +36,13 @@ class TaxStatus(str, Enum):
     NRO = "24"
 
 
-class Gender(str, Enum):
+class Gender(_BSEStr):
     MALE = "M"
     FEMALE = "F"
     OTHER = "O"
 
 
-class OccupationCode(str, Enum):
+class OccupationCode(_BSEStr):
     BUSINESS = "01"
     SERVICE = "02"
     PROFESSIONAL = "03"
@@ -44,7 +59,7 @@ class OccupationCode(str, Enum):
     UNKNOWN = "99"
 
 
-class OccupationType(str, Enum):
+class OccupationType(_BSEStr):
     """FATCA occupation type — coarser grouping derived from OccupationCode.
 
     Callers never set this directly; use from_occupation() or let the
@@ -73,7 +88,7 @@ class OccupationType(str, Enum):
         return cls.OTHERS
 
 
-class HoldingNature(str, Enum):
+class HoldingNature(_BSEStr):
     """v1 always uses SINGLE."""
 
     SINGLE = "SI"
@@ -81,7 +96,7 @@ class HoldingNature(str, Enum):
     ANYONE_OR_SURVIVOR = "AS"
 
 
-class AccountType(str, Enum):
+class AccountType(_BSEStr):
     """v1 only allows SAVINGS and CURRENT."""
 
     SAVINGS = "SB"
@@ -90,26 +105,26 @@ class AccountType(str, Enum):
     NRO = "NO"
 
 
-class DividendPayMode(str, Enum):
+class DividendPayMode(_BSEStr):
     DIRECT_CREDIT = "02"
 
 
-class KYCType(str, Enum):
+class KYCType(_BSEStr):
     KRA_COMPLIANT = "K"
     CKYC_COMPLIANT = "C"
     BIOMETRIC = "B"
     AADHAAR_EKYC = "E"
 
 
-class PaperlessFlag(str, Enum):
+class PaperlessFlag(_BSEStr):
     EKYC = "Z"
 
 
-class CommunicationMode(str, Enum):
+class CommunicationMode(_BSEStr):
     EMAIL = "E"
 
 
-class IndianState(str, Enum):
+class IndianState(_BSEStr):
     ANDHRA_PRADESH = "AP"
     ARUNACHAL_PRADESH = "AR"
     ASSAM = "AS"
@@ -149,7 +164,7 @@ class IndianState(str, Enum):
     LADAKH = "LA"
 
 
-class NomineeRelation(str, Enum):
+class NomineeRelation(_BSEStr):
     AUNT = "01"
     BROTHER_IN_LAW = "02"
     BROTHER = "03"
@@ -175,7 +190,7 @@ class NomineeRelation(str, Enum):
     COURT_APPOINTED_GUARDIAN = "23"
 
 
-class NomineeIDType(str, Enum):
+class NomineeIDType(_BSEStr):
     PAN = "01"
     AADHAAR = "02"
     PASSPORT = "03"
@@ -184,7 +199,7 @@ class NomineeIDType(str, Enum):
     OTHERS = "06"
 
 
-class SourceOfWealth(str, Enum):
+class SourceOfWealth(_BSEStr):
     SALARY = "01"
     BUSINESS_INCOME = "02"
     GIFT = "03"
@@ -195,7 +210,7 @@ class SourceOfWealth(str, Enum):
     OTHERS = "08"
 
 
-class IncomeSlab(str, Enum):
+class IncomeSlab(_BSEStr):
     BELOW_1_LAC = "31"
     ABOVE_1_LAC_UPTO_5_LAC = "32"
     ABOVE_5_LAC_UPTO_10_LAC = "33"
@@ -204,7 +219,7 @@ class IncomeSlab(str, Enum):
     ABOVE_1_CRORE = "36"
 
 
-class FATCATaxIDType(str, Enum):
+class FATCATaxIDType(_BSEStr):
     PASSPORT = "A"
     ELECTION_ID = "B"
     PAN = "D"  # ⚠️ UNVERIFIED — pending BSE confirmation
@@ -216,7 +231,7 @@ class FATCATaxIDType(str, Enum):
     NOT_CATEGORIZED = "X"
 
 
-class FATCAAddressType(str, Enum):
+class FATCAAddressType(_BSEStr):
     RESIDENTIAL = "1"
     BUSINESS = "2"
     REGISTERED = "3"
