@@ -5,7 +5,7 @@ REST HTTP client using httpx for BSE STAR MF REST APIs.
 
 Responsibilities:
 - Hold credentials and inject them into every request body.
-- Make POST calls to BSE REST endpoints.
+- Make HTTP calls to BSE REST endpoints.
 - Translate HTTP transport failures into BSEApiError.
 - Translate BSE-level failures (Status != "0") into typed exceptions.
 

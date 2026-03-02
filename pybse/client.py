@@ -28,6 +28,7 @@ from pybse.models.serializer import build_fatca_param, build_ucc_param
 
 _UCC_PATH = "/BSEMFWEBAPI/UCCAPI/UCCRegistrationV183"
 _FATCA_PATH = "/BSEMFWEBAPI/UCCAPI/FATCADetailsV2"
+_REGN_TYPE = "NEW"
 
 
 @dataclass(frozen=True)
@@ -59,7 +60,7 @@ class BSEClient:
         self._rest.post(
             _UCC_PATH,
             {
-                "RegnType": "NEW",
+                "RegnType": _REGN_TYPE,
                 "Param": build_ucc_param(profile),
             },
         )

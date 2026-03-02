@@ -14,7 +14,7 @@ from pybse.models.enums import OccupationType
 from pybse.models.investor import BankAccount, InvestorProfile, Nominee, TaxResidence
 
 # ---------------------------------------------------------------------------
-# Protocol constants (never vary in v1)
+# Protocol constants
 # ---------------------------------------------------------------------------
 
 _HOLDING = "SI"
