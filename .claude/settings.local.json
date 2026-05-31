@@ -1,0 +1,12 @@
+{
+  "permissions": {
+    "allow": [
+      "mcp__claude_ai_Linear__get_issue",
+      "Bash(python3 -m json.tool)",
+      "Bash(.venv/bin/pytest:*)",
+      "Bash(.venv/bin/ruff check:*)",
+      "mcp__claude_ai_Linear__save_issue",
+      "Bash(source:*)"
+    ]
+  }
+}
